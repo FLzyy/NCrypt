@@ -94,7 +94,6 @@ void encryptFile(string filePath) {
     remove(tempFilePath.c_str());
 }
 
-
 int main()
 {
     while (Redo) {
