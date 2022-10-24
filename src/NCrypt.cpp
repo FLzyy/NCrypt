@@ -13,7 +13,8 @@ int keyinput;
 bool Redo = true;
 //
 
-void decryptFile(string filePath, int key) {
+void decryptFile(string filePath, int key)
+{
     fstream file, tempFile;
     string tempFilePath = "tempde.txt";
 
@@ -21,7 +22,8 @@ void decryptFile(string filePath, int key) {
     tempFile.open(tempFilePath, ios::out);
 
     char byte;
-    while (file >> noskipws >> byte) {
+    while (file >> noskipws >> byte)
+    {
         byte -= key;
 
         tempFile << byte;
@@ -33,7 +35,8 @@ void decryptFile(string filePath, int key) {
     file.open(filePath, ios::out);
     tempFile.open(tempFilePath, ios::in);
 
-    while (tempFile >> noskipws >> byte) {
+    while (tempFile >> noskipws >> byte)
+    {
         file << byte;
     }
 
@@ -43,7 +46,8 @@ void decryptFile(string filePath, int key) {
     remove(tempFilePath.c_str());
 }
 
-int generateKey() {
+int generateKey()
+{
     int key;
 
     random_device rd;
@@ -52,7 +56,7 @@ int generateKey() {
     string keyFilePath = "key.txt";
     keyFile.open(keyFilePath, ios::out);
 
-    uniform_int_distribution<> distr(-99999999999, 99999999999);
+    uniform_int_distribution<> distr(-1215752191, 1215752191);
     keyFile << distr(gen) << endl;
 
     keyFile.close();
@@ -63,7 +67,8 @@ int generateKey() {
     return key;
 }
 
-void encryptFile(string filePath) {
+void encryptFile(string filePath)
+{
     fstream file, tempFile;
     string tempFilePath = "temp.txt";
 
@@ -72,7 +77,8 @@ void encryptFile(string filePath) {
 
     char byte;
     int key = generateKey();
-    while (file >> noskipws >> byte) {
+    while (file >> noskipws >> byte)
+    {
         byte += key;
 
         tempFile << byte;
@@ -83,8 +89,9 @@ void encryptFile(string filePath) {
 
     file.open(filePath, ios::out);
     tempFile.open(tempFilePath, ios::in);
-    
-    while (tempFile >> noskipws >> byte) {
+
+    while (tempFile >> noskipws >> byte)
+    {
         file << byte;
     }
 
@@ -96,18 +103,21 @@ void encryptFile(string filePath) {
 
 int main()
 {
-    while (Redo) {
+    while (Redo)
+    {
         cout << "NCrypt - My attempt at an Encryptor.\n";
         cout << "Decrypt or Encrypt? (0 or 1): ";
         cin >> choice;
 
-        switch (choice) {
+        switch (choice)
+        {
         case 0:
         {
             cout << "\nEnter the local file path to your file (eg. ./Data/file.txt): ";
             cin >> file;
             std::ifstream fileA(file);
-            if (fileA.is_open()) {
+            if (fileA.is_open())
+            {
                 cout << "\nEnter the key used to encrypt the file (Integer):";
                 cin >> keyinput;
                 decryptFile(file, keyinput);
@@ -115,7 +125,8 @@ int main()
                 cout << "Do you want to restart the app (0 to stop, 1 to restart):";
                 cin >> Redo;
             }
-            else {
+            else
+            {
                 cout << "\nAre you sure you entered the correct file path?\n";
                 cout << "Do you want to restart the app (0 to stop, 1 to restart):";
                 cin >> Redo;
@@ -123,11 +134,13 @@ int main()
 
             break;
         }
-        case 1: {
+        case 1:
+        {
             cout << "\nEnter the local file path to your file (eg. ./Data/file.txt): ";
             cin >> file;
             std::ifstream fileB(file);
-            if (fileB.is_open()) {
+            if (fileB.is_open())
+            {
                 encryptFile(file);
                 cout << "\nFinished encrypting your file!, look for key.txt for your decryption key!\n";
                 cout << "Do you want to restart the app (0 to stop, 1 to restart):";
