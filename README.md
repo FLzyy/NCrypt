@@ -1,2 +1,2 @@
 # NCrypt
-My attempt of an encryption algorithm
+My attempt of an encryption thingy
